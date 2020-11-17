@@ -27,7 +27,11 @@ exception ProgramException
 let processSequence (i: int) (s: array<int>) =
     let action = getAction s.[0]
     match action with
-    | Some fn -> input.[s.[3]] <- fn s.[1] s.[2]
+    | Some fn ->
+        let p1 = s.[1]
+        let p2 = s.[2]
+        let dst = s.[3]
+        input.[dst] <- fn input.[p1] input.[p2]
     | None ->
         printfn "ERR: encountered unknown opcode '%i' at sequnce %i" s.[0] i
         raise ProgramException
