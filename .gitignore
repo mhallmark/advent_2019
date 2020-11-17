@@ -449,8 +449,4 @@ bower_components
 .bower-registry
 .bower-tmp
 
-
-### WebSharper ###
-Scripts/
-
 .ionide
