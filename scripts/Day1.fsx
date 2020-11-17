@@ -15,7 +15,7 @@ let computeFuelForFuel (mass: int) =
 
     List.sum fuels
 
-let moduleMasses = File.ReadLines("data/day1-input.txt")
+let moduleMasses = File.ReadLines("data/day1.txt")
 
 let moduleFuel =
     moduleMasses |> Seq.sumBy (int >> massToFuelRatio)
@@ -26,4 +26,4 @@ let moduleMassesWithFuelForFuelMassFromModuleMass =
     moduleMasses
     |> Seq.sumBy (int >> massToFuelRatio >> computeFuelForFuel)
 
-printfn "Total fuel: %i" moduleMassesWithFuelForFuelMassFromModuleMass
+printfn "Total: %i" moduleMassesWithFuelForFuelMassFromModuleMass
