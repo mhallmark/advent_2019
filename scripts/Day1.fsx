@@ -2,28 +2,28 @@
 
 let massToFuelRatio (mass: int) = mass / 3 - 2
 
+let computeFuelForFuel (mass: int) =
+    let mutable fuels = [ mass ]
+
+    while fuels.Head > 0 do
+        let fuelMassFuel =
+            match massToFuelRatio fuels.Head with
+            | sub when sub < 0 -> 0
+            | n -> n
+
+        fuels <- fuelMassFuel :: fuels
+
+    List.sum fuels
+
+let moduleMasses = File.ReadLines("data/day1-input.txt")
+
 let moduleFuel =
-    File.ReadLines("data/day1-input.txt")
-    |> Seq.map (int)
-    |> Seq.sumBy (massToFuelRatio)
+    moduleMasses |> Seq.sumBy (int >> massToFuelRatio)
 
 printfn "Module fuel: %i" moduleFuel
 
-let mutable fuels = [ massToFuelRatio moduleFuel ]
+let moduleMassesWithFuelForFuelMassFromModuleMass =
+    moduleMasses
+    |> Seq.sumBy (int >> massToFuelRatio >> computeFuelForFuel)
 
-while fuels.Head > 0 do
-    let fuelMassFuel =
-        match massToFuelRatio fuels.Head with
-        | sub when sub < 0 -> 0
-        | n -> n
-
-    fuels <- fuelMassFuel :: fuels
-
-Seq.iter (printfn "More fuel mass: %i") fuels
-
-let fuelFuel = fuels |> Seq.sum
-
-printfn "Fuel fuel: %i" fuelFuel
-
-let totalFuel = moduleFuel + fuelFuel
-printfn "Total fuel: %i" totalFuel
+printfn "Total fuel: %i" moduleMassesWithFuelForFuelMassFromModuleMass
